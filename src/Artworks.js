@@ -4,7 +4,7 @@ const Artworks = (props) => {
   const { owner } = props;
 
   return (
-    <ul>
+    <ul id="artworks">
       {owner.artworks.map((artwork, index) => {
         return <li key={index}>{artwork.title}</li>;
       })}

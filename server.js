@@ -8,6 +8,7 @@ const app = express();
 const path = require('path');
 
 app.use('/dist', express.static(path.join(__dirname, './dist')));
+app.use('/assets', express.static(path.join(__dirname, './assets')));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(require('method-override')('_method'));

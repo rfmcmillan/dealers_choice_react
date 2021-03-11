@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Owners from './Owners';
+import Owner from './Owner';
 import Form from './Form';
 
 class App extends Component {
@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       owners: [],
       loading: true,
+      selectedOwnerId: '',
     };
   }
 
@@ -17,23 +18,46 @@ class App extends Component {
       owners: (await axios.get('/api/owners')).data,
       loading: false,
     });
-  }
-
-  async componentDidUpdate() {
-    this.setState({
-      owners: (await axios.get('/api/owners')).data,
-      loading: false,
+    this.setState({ selectedUserId: window.location.hash.slice(1) });
+    window.addEventListener('hashchange', () => {
+      this.setState({ selectedOwnerId: window.location.hash.slice(1) });
     });
   }
 
   render() {
-    if (this.state.loading === true) {
+    const { loading, owners, selectedOwnerId } = this.state;
+    if (loading === true) {
       return '...loading';
     } else {
       return (
-        <div>
-          <Owners owners={this.state.owners} />
-          <Form />
+        <div id="container">
+          <h2>Owners</h2>
+
+          <div id="owner-info">
+            <div>
+              <Form />
+            </div>
+            <div>
+              <ul>
+                {owners.map((owner, index) => {
+                  return (
+                    <li key={index}>
+                      <a href={`#${owner.id}`}>
+                        {owner.firstName} {owner.lastName}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              {!!selectedOwnerId ? (
+                <Owner owner={owners[selectedOwnerId - 1]} />
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
         </div>
       );
     }
