@@ -31,7 +31,7 @@ class App extends Component {
     } else {
       return (
         <div id="container">
-          <h2>Owners</h2>
+          <h2>Clients</h2>
 
           <div id="owner-info">
             <div>
@@ -41,10 +41,15 @@ class App extends Component {
               <ul>
                 {owners.map((owner, index) => {
                   return (
-                    <li key={index}>
+                    <li id="owner" key={index}>
                       <a href={`#${owner.id}`}>
                         {owner.firstName} {owner.lastName}
                       </a>
+                      <form method="POST" action="/api/owners/?_method=DELETE">
+                        <button name="id" value={owner.id}>
+                          X
+                        </button>
+                      </form>
                     </li>
                   );
                 })}

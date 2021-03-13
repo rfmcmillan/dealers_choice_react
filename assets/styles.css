@@ -14,7 +14,16 @@
 
 #artworks {
   border: 1px gray solid;
-  border-radius: 1rem;
-  padding: 1rem;
+  border-radius: 0.5rem;
   margin: 0.5rem;
+}
+
+#owner {
+  display: flex;
+  max-width: 150px;
+  justify-content: space-between;
+}
+#owner > form {
+  margin-left: 1rem;
+  margin-top: 0.2rem;
 }

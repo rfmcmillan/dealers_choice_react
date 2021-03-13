@@ -8,11 +8,6 @@ const Owner = (props) => {
       <big>
         {owner.firstName} {owner.lastName}
       </big>
-      <form method="POST" action="/api/owners/?_method=DELETE">
-        <button name="id" value={owner.id}>
-          X
-        </button>
-      </form>
       <br></br>
       <img src={owner.imageUrl}></img>
       <br></br>
@@ -25,7 +20,10 @@ const Owner = (props) => {
       Collection:
       <Artworks owner={owner} />
       <br></br>
-      <br></br>
+      <form method="POST" action={`/api/owners/${owner.id}`}>
+        <label>Enter New Note:</label>
+        <input name="newNote"></input>
+      </form>
     </div>
   );
 };

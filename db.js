@@ -68,7 +68,6 @@ const syncAndSeed = async () => {
       phone: '312-546-4556',
       notes: 'loremipsum',
     });
-    console.log(jack);
     const jane = await Owner.create({
       imageUrl: 'assets/images/jane.jpeg',
       firstName: 'Jane',

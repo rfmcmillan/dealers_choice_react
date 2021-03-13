@@ -69,6 +69,20 @@ app.post('/api/owners', async (req, res, next) => {
   }
 });
 
+app.post('/api/owners/:ownerId', async (req, res, next) => {
+  try {
+    const owner = await Owner.findByPk(req.params.ownerId);
+    const requestBody = await req.body;
+    const newDate = new Date();
+    const currDate = `${newDate.getMonth()}/${newDate.getDay()}/${newDate.getFullYear()}`;
+    owner.notes += `--${currDate}: ${requestBody.newNote}`;
+    await owner.save();
+    res.redirect(`/`);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.delete('/api/owners', async (req, res, next) => {
   try {
     const owner = await Owner.findByPk(req.body.id);
